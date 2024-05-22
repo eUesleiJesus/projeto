@@ -49,10 +49,10 @@ systemctl restart docker
 echo "Docker e Docker Compose instalados com sucesso!"
 
 #10. Cria um diretório para a imagem do Docker
-mkdir my-express-app
+mkdir tapioca-app
 
 #11. entra no diretório da imagem
-cd my-express-app
+cd tapioca-app
 
 #12. Criar um Dockerfile
 cat > Dockerfile <<EOF
@@ -62,26 +62,27 @@ WORKDIR /app
 
 RUN npm install -g nodemon express-generator
 
-RUN express --view=pug --force my-express-app
+RUN express --view=pug --force tapioca-app
 
 COPY package*.json ./
 
 RUN npm install
 
-RUN sed -i 's/<p>Welcome to Express</p>/<p>Hello World!</p>/g' my-express-app/views/index.pug
+RUN sed -i 's/<p>Welcome to Tapioca</p>/<p>Hello World!</p>/g' tapioca-app/views/index.pug
 
 COPY . .
 
 ENV PORT=3000
 
-CMD ["nodemon", "my-express-app/bin/www"]
+CMD ["nodemon", "tapioca-app/bin/www"]
 EOF
 
 #12. Constrói a imagem do Docker
-docker build -t my-express-app .
+docker build -t tapioca-app .
 
 #13 Executa o container
-docker run -p 3000:3000 my-express-app
+docker run -p 3000:3000 tapioca-app
 
 echo "Ambiente de desenvolvimento configurado com sucesso!!!!"
-echo "Acesse http://localhost:3000 para ver a aplicação."
+echo "Acesse http://localhost:3000 para ver acessar ao Tapioca."
+
