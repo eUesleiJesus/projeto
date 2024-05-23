@@ -14,7 +14,7 @@ apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-prop
 
 
 #2. chave GPG do Docker (método recomendado)
-curlA -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 #3. Adicionar o repositório Docker
 echo \
