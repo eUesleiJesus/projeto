@@ -9,14 +9,17 @@ fi
 
 # 1. Instalação de dependências necessárias
 apt-get update
-apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common lsb-release
+
 
 
 #2. chave GPG do Docker (método recomendado)
 curlA -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 #3. Adicionar o repositório Docker
-add-apt-repository "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 #4. Atualizar a lista de pacotes
 apt-get update
@@ -85,4 +88,5 @@ docker run -p 3000:3000 tapioca-app
 
 echo "Ambiente de desenvolvimento configurado com sucesso!!!!"
 echo "Acesse http://localhost:3000 para ver acessar ao Tapioca."
+
 
